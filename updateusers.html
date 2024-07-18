@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Update Users</title>
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    .card {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Include header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="/" aria-label="Home">PMS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/dashboard.html" aria-label="Dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/properties.html" aria-label="Properties">Properties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/users.html" aria-label="Users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/offers" aria-label="Offers">Offers</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <h3 class="card-title text-center">Update User</h3>
+          <form id="updateUserForm" novalidate>
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+              <div class="invalid-feedback">
+                Please enter your first name.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+              <div class="invalid-feedback">
+                Please enter your last name.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+              <div class="invalid-feedback">
+                Please enter a valid email address.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select class="form-select" id="role" required>
+                <option value="">Select role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a role.
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Update User</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light py-3 mt-4">
+    <div class="container">
+      <p class="text-center mb-0">© 2024 PMS. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Form submission
+      document.getElementById('updateUserForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Form validation
+        var form = event.target;
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
+
+        // Prepare form data
+        var formData = new FormData(form);
+
+        // Submit form data via AJAX
+        fetch('/pmisapp/api/updateuser', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Member updated successfully!');
+            window.location.href = '/pmisapp/admin/users';
+          } else {
+            alert('Error updating user: ' + data.error);
+          }
+        })
+        .catch(error => console.error('Error submitting form:', error));
+      });
+    });
+  </script>
+</body>
+</html>

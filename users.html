@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Q7TxKcOx1qHxKfF3rTskV8RvUuUe5d9J5sttPS9QZ76d2o8t5R1SdrXNRdYQp+2mzqBs3nYfHc2Cf8yYn2Jumw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    .form-select {
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+    .table th, .table td {
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+    .badge-primary {
+      background-color: #007bff;
+    }
+    .badge-success {
+      background-color: #28a745;
+    }
+    .badge-danger {
+      background-color: #dc3545;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+    .btn-primary:focus, .btn-primary.focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-success:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-success:focus, .btn-success.focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    }
+    header {
+      overflow: hidden;
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      height: 60px;
+    }
+    header nav ul {
+      list-style-type: none;
+      margin: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      background: #0074D9;
+    }
+    header nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+    header nav ul li a {
+      display: inline-block;
+      padding: 0em 1.5em;
+      line-height: 60px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    header nav ul li a:hover {
+      background: #fff;
+      color: #0074D9;
+      border-left: 1px solid #0074D9;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Include header -->
+  <div id="header"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("header").innerHTML = data;
+        })
+        .catch(error => console.error('Error fetching header:', error));
+    });
+  </script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="/" aria-label="Home">PMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/dashboard.html" aria-label="Dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/properties.html" aria-label="Properties">Properties</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/users.html" aria-label="Users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/offers" aria-label="Offers">Offers</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <div class="container">
+    <h1>Users</h1>
+
+    <!-- Role Filter -->
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <select class="form-select" onchange="handleRoleFilter(this)">
+          <option value="">All</option>
+          <option value="Admin">Admin</option>
+          <option value="Customer">Customer</option>
+          <option value="Owner">Owner</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- User Table -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
+            <!-- User rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Dummy Data -->
+  <script>
+    // Dummy data structure to simulate user data
+    const userData = [
+      { id: 1, name: 'John Doe', email: 'john.doe@example.com', roles: [{ role: 'Admin' }], address: '123 Street', phone: '555-1234', status: 'ACTIVE' },
+      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', roles: [{ role: 'Customer' }], address: '456 Avenue', phone: '555-5678', status: 'INACTIVE' }
+      // Add more dummy data as needed
+    ];
+
+    // Function to populate user table with dummy data
+    function populateUserTable(data) {
+      const tableBody = document.getElementById('userTableBody');
+      tableBody.innerHTML = data.map(user => {
+        const statusBadgeClass = user.status === 'ACTIVE' ? 'badge-primary' : 'badge-danger';
+        const statusLabel = user.status === 'ACTIVE' ? 'Active' : 'Inactive';
+        const roleBadges = user.roles.map(role => `<span class="badge badge-primary">${role.role}</span>`).join(' ');
+        const approveButton = user.roles.some(role => role.role === 'Owner') && user.status === 'INACTIVE'
+          ? `<button class="btn btn-success"><i class="fas fa-check"></i> Approve</button>`
+          : '';
+        const updateButton = `<button class="btn btn-primary"><i class="fas fa-edit"></i> Update</button>`;
+        return `
+          <tr>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${roleBadges}</td>
+            <td>${user.address}</td>
+            <td>${user.phone}</td>
+            <td><span class="badge ${statusBadgeClass}">${statusLabel}</span></td>
+            <td>
+              <div class="btn-group" role="group">
+                ${updateButton}
+                ${approveButton}
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    // Initial population of user table with dummy data
+    populateUserTable(userData);
+
+    // Function to handle role filter change
+    function handleRoleFilter(select) {
+      const role = select.value;
+      if (role === '') {
+        populateUserTable(userData);
+      } else {
+        const filteredData = userData.filter(user => user.roles.some(r => r.role === role));
+        populateUserTable(filteredData);
+      }
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer class="bg-light py-3 mt-4">
+    <div class="container">
+      <p class="text-center mb-0">© 2024 ICONIC REAL ESTATE. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

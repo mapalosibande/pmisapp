@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routes</title>
+  <link rel="stylesheet" href="/pmisapp/pmisfrontend/src/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/home.html">Home</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/components/login/login.html">Login</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/components/register/register.html">Register</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/admin/properties.html">Properties</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/addproperty.html">Add Property</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/admin/dashboard.html">Dashboard</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/admin/users.html">Users</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="logout.html" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <script>
+    function logout() {
+      // Simulated logout function
+      console.log("Logout function called");
+      // Clear localStorage and redirect to home page
+      localStorage.clear();
+      window.location.href = "home.html";
+    }
+  </script>
+</body>
+</html>

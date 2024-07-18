@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Home</title>
+  <!--link rel="stylesheet" href="/pmisapp/pmisfrontend/src/styles.css"-->
+  <!--script src="/pmisapp/pmisfrontend/src/scripts.js" defer></script-->
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    /* Header styles */
+header {
+
+overflow : hidden;
+}
+header {
+background-color: #343a40;
+color: #fff;
+padding: 10px 0;
+text-align : center;
+height : 60px;
+}
+
+header nav ul {
+list-style-type: none;
+margin: none;
+padding: 0;
+display: flex;
+justify-content: center;
+text-align: center;
+float: right;
+background: #0074D9;
+}
+
+header nav ul li {
+display: inline-block;
+margin: 0 15px;
+}
+
+header nav ul li a {
+display: inline-block;
+padding: 0em 1.5em;
+line-height: 60px;
+color: #fff;
+text-decoration: none;
+font-weight: 600;
+}
+
+header nav ul li a:hover {
+background: #fff;
+color: #0074D9;
+border-left: 1px solid #0074D9;
+text-decoration: underline;
+}
+  </style>
+</head>
+<body>
+  <!-- Include header -->
+ <div id="header"></div>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/home.html">Home</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/components/login/login.html">Login</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/components/register/register.html">Register</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/admin/properties.html">Properties</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/addproperty.html">Add Property</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/admin/dashboard.html">Dashboard</a></li>
+        <li><a href="/pmisapp/pmisfrontend/src/pages/admin/users.html">Users</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+ 
+ 
+
+  <main>
+      <h1>Welcome to PMS</h1>
+  </main>
+  
+  <div class="container">
+    <div class="mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <form class="d-flex gap-2" onsubmit="return false;">
+            <div class="mb-3">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search">
+              <small class="form-text text-muted">Search by property location</small>
+            </div>
+            <div class="mb-3">
+              <button class="btn btn-outline-primary" type="submit">Search</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <div class="d-flex gap-2">
+            <div class="mb-3">
+              <select class="form-select" aria-label="Default select example" onchange="handleChange(this.value)">
+                <option value="price,asc">Sort By</option>
+                <option value="price,asc">Price Low to High</option>
+                <option value="price,desc">Price High to Low</option>
+              </select>
+            </div>
+            <form class="d-flex gap-2" onsubmit="return false;">
+              <div class="mb-3">
+                <select name="category" class="form-select" aria-label="Default select example">
+                  <option value="">Type</option>
+                  <option value="House">House</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Condo">Condo</option>
+                  <option value="Land">Land</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <input type="number" class="form-control" placeholder="Min Price">
+              </div>
+              <div class="mb-3">
+                <input type="number" class="form-control" placeholder="Max Price">
+              </div>
+              <div class="mb-3">
+                <input type="number" class="form-control" placeholder="Number of Room">
+              </div>
+              <div class="mb-3 d-flex gap-2">
+                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                <button class="btn btn-outline-secondary" onclick="handleClear()">Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <!-- Property cards -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Property Title</h5>
+              <p class="card-text">Property description goes here.</p>
+              <a href="#" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+        <!-- Repeat property cards as needed -->
+      </div>
+
+      <div class="row">
+        <!-- Pagination -->
+        <div class="col">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer class="bg-light py-3 mt-4">
+  <div class="container">
+    <p class="text-center mb-0">© 2024 PMS. All rights reserved.</p>
+  </div>
+</footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    function handleChange(value) {
+      const query = new URLSearchParams(window.location.search);
+      query.set("sort", value);
+      window.location.href = `/?${query.toString()}`;
+    }
+
+    function handleClear() {
+      const query = new URLSearchParams(window.location.search);
+      query.delete("search");
+      window.location.href = `/?${query.toString()}`;
+    }
+  </script>
+</body>
+</html>

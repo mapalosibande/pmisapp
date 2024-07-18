@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>About Us</title>
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 15px;
+    }
+    /* Header styles */
+    header {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      height: 60px;
+      overflow: hidden;
+    }
+    header nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      background: #0074D9;
+    }
+    header nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+    header nav ul li a {
+      display: inline-block;
+      padding: 0em 1.5em;
+      line-height: 60px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    header nav ul li a:hover {
+      background: #fff;
+      color: #0074D9;
+      border-left: 1px solid #0074D9;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Include header -->
+  <div id="header"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("header").innerHTML = data;
+        })
+        .catch(error => console.error('Error fetching header:', error));
+    });
+  </script>
+
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col">
+        <h3>About Us</h3>
+        <p>
+          Eloquent high quality Real Estate service providers specialising in Property Sales, Management and V
+        </p>
+        <p>
+          Address
+          P. O. Box 3524, Blantyre, Malawi, 265
+          
+          Mobile
+          0999 30 07 45
+          
+          Email
+          iconicrealestatemw@gmail.com
+          </p>
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light py-3 mt-4">
+    <div class="container">
+      <p class="text-center mb-0">© 2024 PMS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

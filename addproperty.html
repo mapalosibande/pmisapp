@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet">
+  <title>Add Property</title>
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    .map-container {
+      position: relative;
+    }
+    #map-picker {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    .img-thumbnail {
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Include header -->
+  <div id="header"></div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="/" aria-label="Home">PMS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/dashboard.html" aria-label="Dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/properties.html" aria-label="Properties">Properties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/users.html" aria-label="Users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/offers" aria-label="Offers">Offers</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="mt-4">
+      <div class="card mt-4">
+        <div class="card-header">
+          <h3>Add Property</h3>
+        </div>
+        <div class="card-body">
+          <form id="propertyForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="mb-3 d-flex align-items-center gap-3">
+                  <label class="form-label">Seller Type</label>
+                  <div class="form-check">
+                    <input type="radio" id="rent" name="sellerType" class="form-check-input me-2" checked required>
+                    <label for="rent">Rent</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" id="sale" name="sellerType" class="form-check-input me-2" required>
+                    <label for="sale">Sale</label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="title">Title</label>
+                  <input type="text" class="form-control" id="title" placeholder="Enter title" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="numberOfRoom">Number of Rooms</label>
+                  <input type="number" class="form-control" id="numberOfRoom" placeholder="Enter number of rooms" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="price">Price</label>
+                  <div class="input-group">
+                    <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+                    <div class="input-group-append">
+                      <span class="input-group-text">$ / month</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label" for="description">Description</label>
+                  <textarea class="form-control" id="description" rows="5" placeholder="Enter description" required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label" for="category">Category</label>
+                  <select class="form-select" id="category" required>
+                    <option value="">Select category</option>
+                    <option value="House">House</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Condo">Condo</option>
+                    <option value="Land">Land</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label" for="subCategory">House Type</label>
+                  <select class="form-select" id="subCategory" required>
+                    <option value="">Select House type</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="address">Location</label>
+              <textarea class="form-control" id="address" placeholder="Enter location" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="image">Image</label>
+              <input type="file" class="form-control" id="image" multiple required>
+            </div>
+            <div class="mt-3" id="imagePreview">
+              <!-- Image previews will be displayed here -->
+            </div>
+            <div class="mt-4">
+              <div class="map-container">
+                <div id="map-picker">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                    <path d="M0 0h16v16H0z"/>
+                    <path d="M8 1a5 5 0 0 1 5 5c0 2.266-2.524 4.042-4.578 6.397a.5.5 0 0 1-.844 0C5.524 10.042 3 8.266 3 6a5 5 0 0 1 5-5zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                  </svg>
+                </div>
+                <div id="map"></div>
+              </div>
+            </div>
+            <button class="btn btn-primary mt-3" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light py-3 mt-4">
+    <div class="container">
+      <p class="text-center mb-0">© 2024 PMS. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Initialize the map
+      var map = L.map('map').setView(-15.786111, 35.005833);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      var marker = L.marker(-15.786111, 35.005833).addTo(map);
+
+      map.on('click', function(e) {
+        marker.setLatLng(e.latlng);
+        document.getElementById('address').value = e.latlng.lat + ', ' + e.latlng.lng;
+      });
+
+      // Image preview
+      document.getElementById('image').addEventListener('change', function() {
+        var preview = document.getElementById('imagePreview');
+        preview.innerHTML = '';
+        for (var i = 0; i < this.files.length; i++) {
+          var file = this.files[i];
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'img-thumbnail';
+            preview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Form submission
+      document.getElementById('propertyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Form validation
+        var form = event.target;
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
+
+        // Prepare form data
+        var formData = new FormData(form);
+
+        // Submit form data via AJAX
+        fetch('/pmisapp/api/addproperty', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Property added successfully!');
+            form.reset();
+            document.getElementById('imagePreview').innerHTML = '';
+          } else {
+            alert('Error adding property: ' + data.error);
+          }
+        })
+        .catch(error => console.error('Error submitting form:', error));
+      });
+    });
+  </script>
+</body>
+</html>

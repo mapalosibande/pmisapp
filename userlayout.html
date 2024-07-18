@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Layout</title>
+</head>
+<body>
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="/" aria-label="Home">PMS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/?type=RENT" aria-label="Rent">Rent</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/?type=SELL" aria-label="Sell">Sell</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact" aria-label="Contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about" aria-label="About">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+7  
+
+  <!-- Main Content -->
+  <div class="container mt-4">
+    <!-- Placeholder for dynamically loaded content -->
+    <div id="content">
+      <h1>Welcome to Our Website</h1>
+      <p>Content will be dynamically loaded here.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light py-3 mt-4">
+    <div class="container">
+      <p class="text-center mb-0">© 2024 PMS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Include Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function logout() {
+  try {
+    console.log("Logout function called");
+    // Securely clear localStorage and sessionStorage
+    localStorage.removeItem('authToken');
+    sessionStorage.clear();
+    window.location.href = "/pmisapp/pmisfrontend/src/pages/home.html";
+  } catch (error) {
+    console.error("Error during logout:", error);
+  }
+}
+
+  </script>
+</body>
+</html>

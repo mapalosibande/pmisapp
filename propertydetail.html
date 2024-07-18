@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Property Detail</title>
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .badge {
+      margin-left: 10px;
+    }
+    .carousel-item img {
+      max-height: 500px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .map-container {
+      margin-top: 20px;
+    }
+    /* Header styles */
+header {
+
+overflow : hidden;
+}
+header {
+background-color: #343a40;
+color: #fff;
+padding: 10px 0;
+text-align : center;
+height : 60px;
+}
+
+header nav ul {
+list-style-type: none;
+margin: none;
+padding: 0;
+display: flex;
+justify-content: center;
+text-align: center;
+float: right;
+background: #0074D9;
+}
+
+header nav ul li {
+display: inline-block;
+margin: 0 15px;
+}
+
+header nav ul li a {
+display: inline-block;
+padding: 0em 1.5em;
+line-height: 60px;
+color: #fff;
+text-decoration: none;
+font-weight: 600;
+}
+
+header nav ul li a:hover {
+background: #fff;
+color: #0074D9;
+border-left: 1px solid #0074D9;
+text-decoration: underline;
+}
+  </style>
+</head>
+<body>
+
+ <!-- Include header -->
+ <div id="header"></div>
+ <nav class="navbar navbar-expand-lg navbar-light bg-primary" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="/" aria-label="Home">PMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/dashboard.html" aria-label="Dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/properties.html" aria-label="Properties">Properties</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pmisapp/pmisfrontend/src/pages/admin/users.html" aria-label="Users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/offers" aria-label="Offers">Offers</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <div class="container">
+    <div class="mt-4">
+      <div class="row">
+        <div class="col-md-7">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <!-- Replace with dynamic carousel items -->
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="https://via.placeholder.com/800x400.png" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="https://via.placeholder.com/800x400.png" alt="Second slide">
+              </div>
+              <!-- Repeat carousel items as needed -->
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div>
+            <h3>$500,000</h3>
+            <p>123 Main St, New York, NY</p>
+            <p>Rooms: 4</p>
+            <span class="badge badge-success">APPROVED</span>
+            <div class="mt-4">
+              <button class="btn btn-primary">
+                <svg class="bi bi-offer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M5.5 11.5A2.5 2.5 0 0 1 3 9V6.5a3.5 3.5 0 0 1 7 0V9a2.5 2.5 0 0 1-2.5 2.5h1a1.5 1.5 0 0 0 3 0h1a2.5 2.5 0 0 1-2.5 2.5v1a1.5 1.5 0 0 0-3 0v-1zm3-8a.5.5 0 0 0-.5.5V5a3.5 3.5 0 0 0-7 0v-.5a.5.5 0 0 0-1 0V5a4.5 4.5 0 0 0 9 0v-.5a.5.5 0 0 0-.5-.5z"/>
+                </svg> Request Offer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <h4>Description</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod diam lectus, at efficitur nunc tincidunt ac. Fusce ut interdum mauris, vel euismod ipsum.</p>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-12 map-container">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer class="bg-light py-3 mt-4">
+  <div class="container">
+    <p class="text-center mb-0">© 2024 PMS. All rights reserved.</p>
+  </div>
+</footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Leaflet and custom map script -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize Leaflet map
+    var map = L.map('map').setView([40.7128, -74.0060], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    var marker = L.marker([40.7128, -74.0060]).addTo(map);
+    marker.bindPopup("<b>123 Main St, New York, NY</b>").openPopup();
+  </script>
+</body>
+</html>
